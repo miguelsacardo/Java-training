@@ -54,12 +54,16 @@ public class App {
                 }
             }
 
-            //random enemy system
-            System.out.println(newEnemy.chooseEnemy());
-            System.out.println("Enemy type: " + newEnemy.enemyType);
+            Enemy[] goblins = new Enemy[3]; //here, I only created an array with three objects, but not the individuals objects that will be used
+            for(int i = 0; i < goblins.length; i++){
+                goblins[i] = new Enemy(); //here I am creating each individual object
+                goblins[i].chooseEnemy("GOBLIN");
+            }
 
-            System.out.println("\nNext enemy: " + newEnemy.chooseEnemy());
-            System.out.println("Enemy tyoe: " + newEnemy.enemyType);
+            goblins[0].exibirAtributos();
+            goblins[1].exibirAtributos();
+            goblins[2].exibirAtributos();
+            
 
             // //updade level system
             // System.out.println("You find a small stone. Do you want to pick it?");
@@ -170,14 +174,14 @@ class Player{
                         this.life += 30;
                         this.armorClass += 16;
                         this.attack += 12;
-                        this.guild = "WILSONS";
+                        this.guild = "STRONGHAND";
                         break;
 
                     case "EAGLES":
-                        this.life += 8;
+                        this.life += 10;
                         this.armorClass += 14;
                         this.attack += 15;
-                        this.guild = "WILSONS";
+                        this.guild = "EAGLES";
                         break;
                 }
             }
@@ -232,26 +236,51 @@ class Player{
 
 class Enemy extends Player{
     public int life = 0;
-    public int level = 0; //the level always will start in 1
+    public int level = 1; //the level always will start in 1
     public int armorClass = 0;
 
     public double attack = 0;
     public String enemyType;
-    public String[] weakEnemy = {"GOBLIN","WOLF","ZOMBIE","DEPRAVED","POOR-MAGE"};
+
     // public String[] bossEnemy = {"BLACK-KNIGHT","FALLEN-LIGHT"," "}
 
-    public String chooseEnemy(){
-        java.util.Random randomEnemy = new java.util.Random();
-        int enemyLength = this.weakEnemy.length;
+    public void chooseEnemy(String enemyType){
+        switch (enemyType) {
+            case "GOBLIN":
+                this.life += 8;
+                this.armorClass += 12;
+                this.attack += 7;
+                this.enemyType = "GOBLIN";
+                break;
 
-        //generate random numbers
-        int randEnemy = randomEnemy.nextInt(enemyLength);
+            case "WOLF":
+                this.life += 10;
+                this.armorClass += 9;
+                this.attack += 10;
+                this.enemyType = "WOLF";
+                break;
+            
+            case "ZOMBIE":
+                this.life += 18;
+                this.armorClass += 11;
+                this.attack += 11;
+                this.enemyType = "ZOMBIE";
+                break;
 
-        //the enemy's type will be assigned by the choosen enemy
-        this.enemyType = weakEnemy[randEnemy];
+            case "DEPRAVED":
+                this.life += 20;
+                this.armorClass += 15;
+                this.attack += 14;
+                this.enemyType = "DEPRAVED";
+                break;
 
-        //returns an enemy
-        return weakEnemy[randEnemy];
+            case "POOR-MAGE":
+                this.life += 12;
+                this.armorClass += 13;
+                this.attack += 15;
+                this.enemyType = "POOR-MAGE";
+                break;
+        }
     }
 
     //this method subscribes the Player's attack method
@@ -271,5 +300,9 @@ class Enemy extends Player{
         else{
             System.out.println("O inimigo tirou 1");
         }
+    }
+
+    public void exibirAtributos(){
+        System.out.printf("Name: %s\nArmor Class: %d\nLife: %d\nLevel: %d\nAttack: %.0f\nEnemy Type: %s",this.namePlayer,this.armorClass,this.life, this.level, this.attack, this.enemyType);
     }
 }

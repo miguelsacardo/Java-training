@@ -43,6 +43,7 @@ public class App {
                     System.out.println("\n----------------***---------------\n");
                     newPlayer.chooseGuild(choiceGuild);
                     newPlayer.exibirAtributos();
+                    System.out.println("\n----------------***---------------\n");
 
                     break;
                 }
@@ -52,17 +53,25 @@ public class App {
                     System.out.println("\n----------------***---------------\n");
                     continue;
                 }
+            }//end guild system
+
+            //story of game
+            while(true){
+                System.out.printf("Hello, %s. \nYou arrived at the right time!\nYour story starts in a small village next to the north Kingdom.\n", newPlayer.namePlayer);
+                System.out.println("Here it is your house,\nA comfortable place to rest and get calm down.");
+                System.out.println("There is some things that you can do here.\n[1]Explore\n[2]Leave House\nYour choice:\n");
+                break;
             }
 
-            Enemy[] goblins = new Enemy[3]; //here, I only created an array with three objects, but not the individuals objects that will be used
-            for(int i = 0; i < goblins.length; i++){
-                goblins[i] = new Enemy(); //here I am creating each individual object
-                goblins[i].chooseEnemy("GOBLIN");
-            }
+            // Enemy[] goblins = new Enemy[3]; //here, I only created an array with three objects, but not the individuals objects that will be used
+            // for(int i = 0; i < goblins.length; i++){
+            //     goblins[i] = new Enemy(); //here I am creating each individual object
+            //     goblins[i].chooseEnemy("GOBLIN");
+            // }
 
-            goblins[0].exibirAtributos();
-            goblins[1].exibirAtributos();
-            goblins[2].exibirAtributos();
+            // goblins[0].exibirAtributos();
+            // goblins[1].exibirAtributos();
+            // goblins[2].exibirAtributos();
             
 
             // //updade level system
@@ -171,7 +180,7 @@ class Player{
                         break;
 
                     case "STRONGHAND":
-                        this.life += 30;
+                        this.life += 25;
                         this.armorClass += 16;
                         this.attack += 12;
                         this.guild = "STRONGHAND";
@@ -305,4 +314,8 @@ class Enemy extends Player{
     public void exibirAtributos(){
         System.out.printf("Name: %s\nArmor Class: %d\nLife: %d\nLevel: %d\nAttack: %.0f\nEnemy Type: %s",this.namePlayer,this.armorClass,this.life, this.level, this.attack, this.enemyType);
     }
+}
+
+class Story{
+   
 }

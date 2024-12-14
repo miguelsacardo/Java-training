@@ -54,22 +54,33 @@ public class App {
                 }
             }
 
-            //updade level system
-            System.out.println("You find a small stone. Do you want to pick it?");
-            String pick = input.nextLine().toUpperCase();
+            //random enemy system
+            System.out.println(newEnemy.chooseEnemy());
+            System.out.println("Enemy type: " + newEnemy.enemyType);
 
-            if (pick.equals("Y")){
-                newPlayer.level += 1;
-            }
+            System.out.println("\nNext enemy: " + newEnemy.chooseEnemy());
+            System.out.println("Enemy tyoe: " + newEnemy.enemyType);
 
-            System.out.println("AAA");
-            String pick2 = input.nextLine().toUpperCase();
+            // //updade level system
+            // System.out.println("You find a small stone. Do you want to pick it?");
+            // String pick = input.nextLine().toUpperCase();
 
-            if(pick2.equals("Y")){
-                newPlayer.level += 3;
-            }
+            // if (pick.equals("Y")){
+            //     newPlayer.level += 3;
+            //     newPlayer.updateLevel();
+            //     newPlayer.exibirAtributos();
+            // }
 
-            System.out.println("Your new level is: " + newPlayer.level);
+            // System.out.println("AAA");
+            // String pick2 = input.nextLine().toUpperCase();
+
+            // if(pick2.equals("Y")){
+            //     newPlayer.level += 1;
+            //     newPlayer.updateLevel();
+            //     newPlayer.exibirAtributos();
+            // }
+
+            // System.out.println("Your new level is: " + newPlayer.level);
 
             // //testing instancing different objects to make sure that they will have its own attributes
             // Enemy goblin = new Enemy();
@@ -197,15 +208,51 @@ class Player{
             System.out.println("Você tirou 1");
         }
     }
+
+    public void updateLevel(){
+        if (this.level == 2){
+            this.life += 3;
+            this.attack += 2;
+            this.armorClass += 1;
+        }else if(this.level == 3){
+            this.life += 4;
+            this.attack += 3;
+            this.armorClass += 1;
+        }else if(this.level == 4){
+            this.life += 6;
+            this.attack += 5;
+            this.armorClass += 3;
+        }else if(this.level == 5){
+            this.life += 9;
+            this.attack += 8;
+            this.armorClass += 3;
+        }
+    }
 }
 
 class Enemy extends Player{
-    public int life = 20;
-    public int level = 3; //the level always will start in 1
-    public int armorClass = 14;
+    public int life = 0;
+    public int level = 0; //the level always will start in 1
+    public int armorClass = 0;
 
-    public double attack = 5;
+    public double attack = 0;
     public String enemyType;
+    public String[] weakEnemy = {"GOBLIN","WOLF","ZOMBIE","DEPRAVED","POOR-MAGE"};
+    // public String[] bossEnemy = {"BLACK-KNIGHT","FALLEN-LIGHT"," "}
+
+    public String chooseEnemy(){
+        java.util.Random randomEnemy = new java.util.Random();
+        int enemyLength = this.weakEnemy.length;
+
+        //generate random numbers
+        int randEnemy = randomEnemy.nextInt(enemyLength);
+
+        //the enemy's type will be assigned by the choosen enemy
+        this.enemyType = weakEnemy[randEnemy];
+
+        //returns an enemy
+        return weakEnemy[randEnemy];
+    }
 
     //this method subscribes the Player's attack method
     public void attack(int playerArmorClass, Player playerLife, int diceResult){

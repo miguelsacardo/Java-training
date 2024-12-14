@@ -54,32 +54,49 @@ public class App {
                 }
             }
 
-            //testing instancing different objects to make sure that they will have its own attributes
-            Enemy goblin = new Enemy();
-            goblin.enemyType = "Goblin";
-            Enemy trasgo = new Enemy();
-            do{
-                System.out.println("An enemy is comming! Get ready for the attack!");
-                newPlayer.attack(goblin.armorClass,goblin, newPlayer.diceD20());
+            //updade level system
+            System.out.println("You find a small stone. Do you want to pick it?");
+            String pick = input.nextLine().toUpperCase();
 
-                System.out.println("The enemy1s life now is: " + goblin.life);
+            if (pick.equals("Y")){
+                newPlayer.level += 1;
+            }
 
-                System.out.println("Now, it is the enemy's time!");
-                newEnemy.attack(newPlayer.armorClass,newPlayer, goblin.diceD20());
+            System.out.println("AAA");
+            String pick2 = input.nextLine().toUpperCase();
 
-                System.out.println("Hero, your life is now: " + newPlayer.life);
+            if(pick2.equals("Y")){
+                newPlayer.level += 3;
+            }
 
-                System.out.println("\nVida do goblin: " + goblin.life + "Vida trasgo: " + trasgo.life);
+            System.out.println("Your new level is: " + newPlayer.level);
 
-                if(newPlayer.life == 0 || newPlayer.life < 0){
-                    System.out.println("The enemy wins");
-                    break;
-                }else if(goblin.life == 0 || goblin.life < 0){
-                    System.out.println("The player wins");
-                    break;
-                }
+            // //testing instancing different objects to make sure that they will have its own attributes
+            // Enemy goblin = new Enemy();
+            // goblin.enemyType = "Goblin";
+            // Enemy trasgo = new Enemy();
+            // do{
+            //     System.out.println("An enemy is comming! Get ready for the attack!");
+            //     newPlayer.attack(goblin.armorClass,goblin, newPlayer.diceD20());
 
-            }while(newPlayer.life > 0 && goblin.life > 0);
+            //     System.out.println("The enemy1s life now is: " + goblin.life);
+
+            //     System.out.println("Now, it is the enemy's time!");
+            //     newEnemy.attack(newPlayer.armorClass,newPlayer, goblin.diceD20());
+
+            //     System.out.println("Hero, your life is now: " + newPlayer.life);
+
+            //     System.out.println("\nVida do goblin: " + goblin.life + "Vida trasgo: " + trasgo.life);
+
+            //     if(newPlayer.life == 0 || newPlayer.life < 0){
+            //         System.out.println("The enemy wins");
+            //         break;
+            //     }else if(goblin.life == 0 || goblin.life < 0){
+            //         System.out.println("The player wins");
+            //         break;
+            //     }
+
+            // }while(newPlayer.life > 0 && goblin.life > 0);
 
             
 

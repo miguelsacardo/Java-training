@@ -54,15 +54,20 @@ public class App {
                 }
             }
 
-            System.out.println("An enemy is comming! Get ready for the attack!");
-            newPlayer.attack(newEnemy.armorClass, newPlayer.diceD20());
+            do{
+                System.out.println("An enemy is comming! Get ready for the attack!");
+                newPlayer.attack(newEnemy.armorClass, newPlayer.diceD20());
 
-            System.out.println("The enemy1s life now is: " + newEnemy.life);
+                System.out.println("The enemy1s life now is: " + newEnemy.life);
 
-            System.out.println("Now, it is the enemy's time! Get ready for the attack!");
-            newEnemy.attack(newPlayer.armorClass, newEnemy.diceD20());
+                System.out.println("Now, it is the enemy's time!");
+                newEnemy.attack(newPlayer.armorClass, newEnemy.diceD20());
 
-            System.out.println("Hero, your life is now: " + newPlayer.life);
+                System.out.println("Hero, your life is now: " + newPlayer.life);
+
+            }while(newPlayer.life > 0 && newEnemy.life > 0);
+
+            
 
 
             // System.out.println(newPlayer.playerGuild);
@@ -170,21 +175,22 @@ class Enemy extends Player{
 
     public double attack = 5;
 
+    //this method subscribes the Player's attack method
     public void attack(int playerArmorClass, int diceResult){
         System.out.println(diceResult);
         
         if(diceResult >= playerArmorClass && diceResult < 20){
-            System.out.println("Você acertou, mas não foi crítico");
+            System.out.println("O inimigo te acertou, mas não foi crítico");
             Player.life -= this.attack;
         }else if(diceResult == 20){
-            System.out.println("Você critou!");
+            System.out.println("O inimigo critou!");
             Player.life -= (this.attack * 2);
         }
         else if(diceResult < playerArmorClass && diceResult > 1){
-            System.out.println("Você não acertou");
+            System.out.println("O inimigo não acertou");
         }
         else{
-            System.out.println("Você tirou 1");
+            System.out.println("O inimigo tirou 1");
         }
     }
 }

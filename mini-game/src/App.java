@@ -54,18 +54,32 @@ public class App {
                 }
             }
 
+            //testing instancing different objects to make sure that they will have its own attributes
+            Enemy goblin = new Enemy();
+            goblin.enemyType = "Goblin";
+            Enemy trasgo = new Enemy();
             do{
                 System.out.println("An enemy is comming! Get ready for the attack!");
-                newPlayer.attack(newEnemy.armorClass, newPlayer.diceD20());
+                newPlayer.attack(goblin.armorClass,goblin, newPlayer.diceD20());
 
-                System.out.println("The enemy1s life now is: " + newEnemy.life);
+                System.out.println("The enemy1s life now is: " + goblin.life);
 
                 System.out.println("Now, it is the enemy's time!");
-                newEnemy.attack(newPlayer.armorClass, newEnemy.diceD20());
+                newEnemy.attack(newPlayer.armorClass,newPlayer, goblin.diceD20());
 
                 System.out.println("Hero, your life is now: " + newPlayer.life);
 
-            }while(newPlayer.life > 0 && newEnemy.life > 0);
+                System.out.println("\nVida do goblin: " + goblin.life + "Vida trasgo: " + trasgo.life);
+
+                if(newPlayer.life == 0 || newPlayer.life < 0){
+                    System.out.println("The enemy wins");
+                    break;
+                }else if(goblin.life == 0 || goblin.life < 0){
+                    System.out.println("The player wins");
+                    break;
+                }
+
+            }while(newPlayer.life > 0 && goblin.life > 0);
 
             
 
@@ -86,7 +100,7 @@ public class App {
 
 class Player{
     public String namePlayer;
-    public static int life = 0;
+    public int life = 0;
     public int level = 1; //the level always will start in 1
     public int armorClass = 0;
 
@@ -149,15 +163,15 @@ class Player{
     }
 
     //player's attack
-    public void attack(int enemyArmorClass, int diceResult){
+    public void attack(int enemyArmorClass,Enemy enemyLife, int diceResult){ //I can pass a class as a paramter and then the function will take care of the rest
         System.out.println(diceResult);
         
         if(diceResult >= enemyArmorClass && diceResult < 20){
             System.out.println("Você acertou, mas não foi crítico");
-            Enemy.life -= this.attack;
+            enemyLife.life -= this.attack; //with the object passed as a paramter, i can access the attributes and the functions from it
         }else if(diceResult == 20){
             System.out.println("Você critou!");
-            Enemy.life -= (this.attack * 2);
+            enemyLife.life -= (this.attack * 2);
         }
         else if(diceResult < enemyArmorClass && diceResult > 1){
             System.out.println("Você não acertou");
@@ -169,22 +183,23 @@ class Player{
 }
 
 class Enemy extends Player{
-    public static int life = 100;
+    public int life = 20;
     public int level = 3; //the level always will start in 1
     public int armorClass = 14;
 
     public double attack = 5;
+    public String enemyType;
 
     //this method subscribes the Player's attack method
-    public void attack(int playerArmorClass, int diceResult){
+    public void attack(int playerArmorClass, Player playerLife, int diceResult){
         System.out.println(diceResult);
         
         if(diceResult >= playerArmorClass && diceResult < 20){
             System.out.println("O inimigo te acertou, mas não foi crítico");
-            Player.life -= this.attack;
+            playerLife.life -= this.attack;
         }else if(diceResult == 20){
             System.out.println("O inimigo critou!");
-            Player.life -= (this.attack * 2);
+            playerLife.life -= (this.attack * 2);
         }
         else if(diceResult < playerArmorClass && diceResult > 1){
             System.out.println("O inimigo não acertou");

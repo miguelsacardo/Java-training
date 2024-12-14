@@ -59,6 +59,12 @@ public class App {
 
             System.out.println("The enemy1s life now is: " + newEnemy.life);
 
+            System.out.println("Now, it is the enemy's time! Get ready for the attack!");
+            newEnemy.attack(newPlayer.armorClass, newEnemy.diceD20());
+
+            System.out.println("Hero, your life is now: " + newPlayer.life);
+
+
             // System.out.println(newPlayer.playerGuild);
         
             // System.out.println(guild);
@@ -75,7 +81,7 @@ public class App {
 
 class Player{
     public String namePlayer;
-    public int life = 0;
+    public static int life = 0;
     public int level = 1; //the level always will start in 1
     public int armorClass = 0;
 
@@ -163,4 +169,22 @@ class Enemy extends Player{
     public int armorClass = 14;
 
     public double attack = 5;
+
+    public void attack(int playerArmorClass, int diceResult){
+        System.out.println(diceResult);
+        
+        if(diceResult >= playerArmorClass && diceResult < 20){
+            System.out.println("Você acertou, mas não foi crítico");
+            Player.life -= this.attack;
+        }else if(diceResult == 20){
+            System.out.println("Você critou!");
+            Player.life -= (this.attack * 2);
+        }
+        else if(diceResult < playerArmorClass && diceResult > 1){
+            System.out.println("Você não acertou");
+        }
+        else{
+            System.out.println("Você tirou 1");
+        }
+    }
 }

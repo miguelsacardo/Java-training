@@ -59,7 +59,28 @@ public class App {
             while(true){
                 System.out.printf("Hello, %s. \nYou arrived at the right time!\nYour story starts in a small village next to the north Kingdom.\n", newPlayer.namePlayer);
                 System.out.println("Here it is your house,\nA comfortable place to rest and get calm down.");
-                System.out.println("There is some things that you can do here.\n[1]Explore\n[2]Leave House\nYour choice:\n");
+                System.out.println("\n----------------***---------------\n");
+                System.out.println("There is some things that you can do here.\n[1]Explore\n[2]Leave House\nYour choice: ");
+                System.out.println("\n----------------***---------------\n");
+
+                switch(input.nextLine()){
+                    case "1":
+                        System.out.printf("Your best friend Sword is next to your bed and you take it! Your attack has increased!\nYour attack is now: %.0f", newPlayer.attack += 4.0);
+                        System.out.println("\nThen, you finally leave your house...");
+                        break;
+
+                    case "2":
+                        System.out.println("You leave the house, but unfortunatelly without your best friend Sword...");
+                        break;
+
+                    default:
+                        System.out.printf("%s, please select a valid option!", newPlayer.namePlayer);
+                        break;
+                }
+
+                System.out.println("\n----------------***---------------\n");
+                System.out.println("The day seems beautiful.\nYou see the mailman from the North Kingdom approaching your house.");
+                
                 break;
             }
 

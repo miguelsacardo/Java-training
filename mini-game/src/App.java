@@ -3,10 +3,12 @@
 
 import java.util.Scanner;
 
+
 public class App {
-    public static void main(String[] args){
+    public static void main(String[] args) throws InterruptedException{
 
         //variables declaration
+        boolean choices = true;
         Scanner input = new Scanner(System.in);
 
         //object instances
@@ -62,58 +64,98 @@ public class App {
                 System.out.println("\n----------------***---------------\n");
                 System.out.println("There is some things that you can do here.\n[1]Explore\n[2]Leave House\nYour choice: ");
                 System.out.println("\n----------------***---------------\n");
+                
 
-                switch(input.nextLine()){
+                while(choices){
+                    switch(input.nextLine()){
 
-                    case "1":
-                        System.out.printf("Your best friend Sword is next to your bed and you take it! Your attack has increased!\nYour attack is now: %.0f", newPlayer.attack += 4.0);
-                        System.out.println("\nThen, you finally leave your house...");
-                        break;
+                        case "1":
+                            System.out.printf("Your best friend Sword is next to your bed and you take it! Your attack has increased!\nYour attack is now: %.0f", newPlayer.attack += 4.0);
+                            System.out.println("\nThen, you finally leave your house...");
+                             
+                            //stops the loop
+                            choices = false;
+                            break;
 
-                    case "2":
-                        System.out.println("You leave the house, but unfortunatelly without your best friend Sword...");
-                        break;
+                        case "2":
+                            System.out.println("You leave the house, but unfortunatelly without your best friend Sword...");
+                            choices = false;
+                            break;
 
-                    default:
-                        System.out.printf("%s, please select a valid option!", newPlayer.namePlayer);
-                        break;
+                        default:
+                            System.out.printf("%s, please select a valid option!\n[1]Explore\n[2]Leave House\nYour choice: ", newPlayer.namePlayer);
+                            continue;
+                    }
                 }
+                
+                //the variable "choices" must be true again
+                choices = true;
 
+                //delay the introduce of dialogue
+                Thread.sleep(5000);
                 System.out.println("\n----------------***---------------\n");
                 System.out.println("The day seems beautiful.\nYou see the mailman from the North Kingdom approaching your house.\n");
                 System.out.println("Mailman: Hello Sir. I have a mail for you.\nMailman: Here, take it.");
                 System.out.println("You take the mail and open it.\nThe mail is from the King Sans III, and he needs to see you.");
                 System.out.println("\n----------------***---------------\n");
+
+                Thread.sleep(5000);
                 System.out.printf("%s, the North Kingdom needs help. The monsters from the Tenth Axis are starting a war with us to stole our natural resources!", newPlayer.namePlayer);
                 System.out.println("\nYou are our old knight. Please, consider our offer.\nWe are going to give you everything that you want.\nWe will give you a new place to live, money and fame!\nYou know that you are the pride of the Kingdom.");
                 System.out.println("\n----------------***---------------\n");
+
+                Thread.sleep(5000);
                 System.out.printf("%s, will you accept this order?\n[Y]Yes\n[N]No\nYour choice: ", newPlayer.namePlayer);
 
-                switch (input.nextLine().toUpperCase()) {
-                    case "Y":
-                        System.out.println("Good, hero. Everyone know that you are going to give the best help.");
-                    case "N":
-                        int i = 0;
-                        while(i < 5){
-                            System.out.println("Please, consider the offer.\n[Y]Yes\n[N]No\nYour choice: ");
+                while(choices){
+                    switch (input.nextLine().toUpperCase()){
+                        case "Y":
+                            System.out.println("Good, hero. Everyone know that you are going to give the best help.");
+                            
+                            //updates the player's level
+                            newPlayer.level += 1;
+                            newPlayer.updateLevel();
 
-                            String playerOption = input.nextLine().toUpperCase();
-                            if(playerOption.equals("Y")){
-                                System.out.printf("Thanks, Hero. At least in the %d time...", i);
+                            System.out.printf("For your corage, now your level is: %d\n", newPlayer.level);
+                            System.out.println("\n----------------***---------------\n");
 
-                                newPlayer.level += 1;
-                                newPlayer.updateLevel();
-
-                                break;
-                            }else{
-                                System.out.println("OMG Hero! Don't do this way!");
-                                i++;
-                            }
-                        }
-                        if(i == 5){
-                            System.out.println("Ok. See you next time.");
+                            choices = false;
                             break;
-                        }
+                            
+                        case "N":
+                            int i = 0;
+                            while(i < 5){
+                                System.out.println("Please, consider the offer.\n[Y]Yes\n[N]No\nYour choice: ");
+
+                                String playerOption = input.nextLine().toUpperCase();
+                                if(playerOption.equals("Y")){
+                                    System.out.printf("Thanks, Hero. At least in the %d time...", i + 2);
+                                    
+                                    //updates the player's level
+                                    newPlayer.level += 1;
+                                    newPlayer.updateLevel();
+
+                                    System.out.printf("\nFor your corage, now your level is: %d", newPlayer.level);
+
+                                    choices = false;
+                                    break;
+                                }else{
+                                    System.out.println("OMG Hero! Don't do this way!");
+                                    i++;
+                                }
+                            }
+                            if(i == 5){
+                                System.out.println("Ok. See you next time.");
+
+                                choices = false;
+                                break;
+                            }
+                            break;
+
+                        default:
+                            System.out.println("Hero, please select a valid option!\n[Y]Yes\n[N]No\nYour choice: ");
+                            continue;
+                    }
                 }
 
 

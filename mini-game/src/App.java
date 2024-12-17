@@ -9,11 +9,17 @@ public class App {
 
         //variables declaration
         boolean choices = true;
-        Scanner input = new Scanner(System.in);
+        boolean isGameRunning = true;
 
         //object instances
         Player newPlayer = new Player();
-        Enemy newEnemy = new Enemy();
+        Enemy[] newEnemy = new Enemy[1]; //create an array of enemies
+        Scanner input = new Scanner(System.in);
+
+        //create the game's enemies
+        for(int i = 0; i < newEnemy.length; i++){
+            newEnemy[i] = new Enemy();
+        }
 
             
         //"screen" of the game
@@ -41,31 +47,36 @@ public class App {
                 System.out.println("Choose your guild:\nClothfeet\nWilsons\nStronghand\nEagles\nYour Choice: ");
                 String choiceGuild = input.nextLine().toUpperCase();
 
+
+                //verify if the guild is valid
                 if (choiceGuild.equals("CLOTHFEET") || choiceGuild.equals("WILSONS") || choiceGuild.equals("STRONGHAND") ||choiceGuild.equals("EAGLES")){
                     System.out.println("\n----------------***---------------\n");
                     newPlayer.chooseGuild(choiceGuild);
                     newPlayer.exibirAtributos();
                     System.out.println("\n----------------***---------------\n");
 
+                    //stops the guild system
                     break;
                 }
                 else{
                     System.out.println("\n----------------***---------------\n");
                     System.out.println("Choose a valid guild!");
                     System.out.println("\n----------------***---------------\n");
+
+                    //restarts the guild system if the player choose an invalid guild
                     continue;
                 }
             }//end guild system
 
             //story of game
-            while(true){
+            while(isGameRunning){
                 System.out.printf("Hello, %s. \nYou arrived at the right time!\nYour story starts in a small village next to the north Kingdom.\n", newPlayer.namePlayer);
                 System.out.println("Here it is your house,\nA comfortable place to rest and get calm down.");
                 System.out.println("\n----------------***---------------\n");
                 System.out.println("There is some things that you can do here.\n[1]Explore\n[2]Leave House\nYour choice: ");
                 System.out.println("\n----------------***---------------\n");
                 
-
+                //choice -> explore the house and get or not a sword
                 while(choices){
                     switch(input.nextLine()){
 
@@ -73,20 +84,24 @@ public class App {
                             System.out.printf("Your best friend Sword is next to your bed and you take it! Your attack has increased!\nYour attack is now: %.0f", newPlayer.attack += 4.0);
                             System.out.println("\nThen, you finally leave your house...");
                              
-                            //stops the loop
+                            //stops the choices loop
                             choices = false;
                             break;
 
                         case "2":
                             System.out.println("You leave the house, but unfortunatelly without your best friend Sword...");
+
+                            //stops the choices loop
                             choices = false;
                             break;
 
                         default:
                             System.out.printf("%s, please select a valid option!\n[1]Explore\n[2]Leave House\nYour choice: ", newPlayer.namePlayer);
+
+                            //restart the choices loop if the player choose an invalid option
                             continue;
                     }
-                }
+                }// end choices
                 
                 //the variable "choices" must be true again
                 choices = true;
@@ -107,22 +122,25 @@ public class App {
                 Thread.sleep(5000);
                 System.out.printf("%s, will you accept this order?\n[Y]Yes\n[N]No\nYour choice: ", newPlayer.namePlayer);
 
+                //choice -> accept the request of the kingdom
                 while(choices){
                     switch (input.nextLine().toUpperCase()){
                         case "Y":
                             System.out.println("Good, hero. Everyone know that you are going to give the best help.");
                             
-                            //updates the player's level
+                            //updates the player's level if the player accepts
                             newPlayer.level += 1;
                             newPlayer.updateLevel();
 
                             System.out.printf("For your corage, now your level is: %d\n", newPlayer.level);
-                            System.out.println("\n----------------***---------------\n");
 
+                            //stops the choices loop
                             choices = false;
                             break;
                             
                         case "N":
+
+                            //this while is to make the player accept the request
                             int i = 0;
                             while(i < 5){
                                 System.out.println("Please, consider the offer.\n[Y]Yes\n[N]No\nYour choice: ");
@@ -131,33 +149,65 @@ public class App {
                                 if(playerOption.equals("Y")){
                                     System.out.printf("Thanks, Hero. At least in the %d time...", i + 2);
                                     
-                                    //updates the player's level
+                                    //updates the player's level if the player accepts the request
                                     newPlayer.level += 1;
                                     newPlayer.updateLevel();
 
                                     System.out.printf("\nFor your corage, now your level is: %d", newPlayer.level);
 
-                                    choices = false;
-                                    break;
+                                    choices = false; //stops the choices loop
+                                    break; //stops this while (i < 5)
                                 }else{
+
+                                    //if the player refuses, the "i" is incremented
                                     System.out.println("OMG Hero! Don't do this way!");
-                                    i++;
+                                    i++; 
                                 }
                             }
+
+                            //ends the game if the player refuses for 5 times
                             if(i == 5){
                                 System.out.println("Ok. See you next time.");
+                                
+                                //stops the game
+                                isGameRunning = false;
 
+                                //stops the choices loop
                                 choices = false;
-                                break;
                             }
                             break;
 
                         default:
+
+                            //restarts the loop if the player chooses an invalid option
                             System.out.println("Hero, please select a valid option!\n[Y]Yes\n[N]No\nYour choice: ");
                             continue;
                     }
+                }//end choices
+
+                //stops the game story if the player don't accept the request
+                if(isGameRunning == false){
+                    break;
                 }
 
+                Thread.sleep(5000);
+                System.out.println("\n----------------***---------------\n");
+                System.out.println("In the same night, you take your horse and come in the north direction.\nThe breeze hits your face and you\nFeel excited that you are\nGoing to save\nYour homeland.");
+                System.out.println("The North Kingdom is not far away,\nSo it won't take you long to arrive.");
+
+                Thread.sleep(5000);
+                System.out.println("\n----------------***---------------\n");
+                System.out.println("Did you hear that?\nThere was a noise in the bush.\nYou stop and pay attention.");
+                System.out.println("A GOBLIN JUMPS IN FRONT OF YOU.");
+
+                
+
+                
+
+
+
+                //test print
+                newPlayer.exibirAtributos();
 
                 
                 

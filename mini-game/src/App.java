@@ -13,7 +13,7 @@ public class App {
 
         //object instances
         Player newPlayer = new Player();
-        Enemy[] newEnemy = new Enemy[1]; //create an array of enemies
+        Enemy[] newEnemy = new Enemy[2]; //create an array of enemies
         Scanner input = new Scanner(System.in);
 
         //create the game's enemies
@@ -36,11 +36,6 @@ public class App {
             newPlayer.namePlayer = input.nextLine().toUpperCase();
             
             System.out.println("\n----------------***---------------\n");
-            
-
-            // //testing function
-            // newPlayer.exibirAtributos();
-            //System.out.println("\n----------------***---------------");
 
             //guild system
             while(true){
@@ -110,7 +105,7 @@ public class App {
                 Thread.sleep(5000);
                 System.out.println("\n----------------***---------------\n");
                 System.out.println("The day seems beautiful.\nYou see the mailman from the North Kingdom approaching your house.\n");
-                System.out.println("Mailman: Hello Sir. I have a mail for you.\nMailman: Here, take it.");
+                System.out.println("MAILMAN: Hello Sir. I have a mail for you.\nMAILMAN: Here, take it.");
                 System.out.println("You take the mail and open it.\nThe mail is from the King Sans III, and he needs to see you.");
                 System.out.println("\n----------------***---------------\n");
 
@@ -185,6 +180,9 @@ public class App {
                     }
                 }//end choices
 
+                //the variable "choices" must be true again
+                choices = true;
+
                 //stops the game story if the player don't accept the request
                 if(isGameRunning == false){
                     break;
@@ -201,7 +199,7 @@ public class App {
                 System.out.println("A GOBLIN JUMPS IN FRONT OF YOU.");
 
                 Thread.sleep(5000);
-                System.out.println("Goblin: This is a robbery!");
+                System.out.println("GOBLIN RICHARD: This is a robbery!");
 
                 //creates the goblin enemy
                 newEnemy[0].chooseEnemy("GOBLIN");
@@ -236,12 +234,9 @@ public class App {
 
                     System.out.println("\n------------------------------------------------\n");
 
-                    //checks if someone wins and stops the combat loop
-                    if(newPlayer.life <= 0 && newEnemy[0].life > 0){
-                        System.out.println("The Enemy wins!");
-                        break;
-                    }else if(newPlayer.life > 0 && newEnemy[0].life <= 0){
+                    if(newPlayer.life > 0 && newEnemy[0].life <= 0){
                         System.out.println("The Hero wins!");
+
                         break;
                     }
 
@@ -256,14 +251,158 @@ public class App {
                     //shows the player's life
                     System.out.printf("\nHero, your life is: %d\n", newPlayer.life);
 
+                    //checks if someone wins and stops the combat loop
+                    if(newPlayer.life <= 0 && newEnemy[0].life > 0){
+
+                        System.out.println("\n------------------------------------------------\n");
+                        System.out.println("The Enemy wins!");
+                        System.out.println("Unfortunately, everyone waited for a Hero who never came.\nThe Kingdom was dominated and destroyed.");
+                        System.out.println("\n------------------------------------------------\n");
+
+                        isGameRunning = false; //stops the game
+                        break; //stops the combat loop
+                    }
                 }while(newPlayer.life >= 0 && newEnemy[0].life >= 0);
+
+                //if the player loses the combat the game is stopped
+                if(isGameRunning == false){
+                    break;
+                }
 
                 System.out.println("\n----------------***---------------\n");
                 System.out.println("WOW! This was close!\nDon't be afraid Hero.\nThere will be worst things...\n");
 
                 Thread.sleep(5000);
                 System.out.println("A few hours after the unexpected, you arrive at the North Kingdom.\nThe North Kingdom is made up of many huge buildings\nMade from various ores.");
-                System.out.println("You miss your home. This is an opportunity to be at home.");
+                System.out.println("You miss your home. This is an opportunity to be at home.\nThe smells of the city remind you of your childhood.\nSoon, you go to see the King Sans.");
+
+                Thread.sleep(5000);
+                System.out.println("\n----------------***---------------\n");
+                System.out.printf("KING SANS III: It is not possible! You really come, %s!\nKING SANS III: I have been waiting for your return,\nKING SANS III: Since that accide--", newPlayer.namePlayer);
+                System.out.println("\nROYAL ADVISOR MALBEC: It is not necessary to mention.");
+
+                Thread.sleep(5000);
+                System.out.println("\nYou remember very well what happened. But you don't show any emotion...\n");
+
+                Thread.sleep(5000);
+                System.out.println("KING SANS III: You need to help us.\nKING SANS III: We've received an alert that the Tenth Axis\nKING SANS III: Is comming to steal from us.\nKING SANS III: Our resources, our fame, our WOMEN, ou--");
+                System.out.printf("%s: I understand. Tell me what I have to do.\n", newPlayer.namePlayer);
+
+                Thread.sleep(5000);
+                System.out.println("KING SANS III: YOU NEED TO STOP THE MONSTERS!\nKING SANS III: Find them and destroy them!");
+                System.out.printf("%s: Ok. I will to the Tenth Axis.", newPlayer.namePlayer);
+                System.out.printf("\nKING SANS III: OMG! Thanks %s! I don't know what I would do without you! OMG!\n", newPlayer.namePlayer);
+
+                Thread.sleep(5000);
+                System.out.println("\n----------------***---------------\n");
+                System.out.println("You sleep in a cozy hotel\nTo Leave early the next day.");
+                System.out.println("You are ready to your mission.\nYou wake up, take your horse and\nGo to the Tenth Axis.");
+
+                Thread.sleep(5000);
+                System.out.println("\n----------------***---------------\n");
+                System.out.println("The Tenth Axis is a secluded area, meant to seal monsters.\nBut they figure out that your power is more stronger than the humans.\nAfter many years of segregation, they are finally going to leave the Tenth Axis.");
+                System.out.println("The path was incredibly calm and you arrive in safe");
+                System.out.println("The huge gate of Tenth Axis open in your front.");
+
+                Thread.sleep(5000);
+                System.out.println("\n----------------***---------------\n");
+                System.out.println("A very large man is the doorman.\nDOORMAN STEVE: You don't look like a monster...\nDOORMAN STEVE: What race are you?");
+
+                //creates the door man
+                newEnemy[1].chooseEnemy("DOORMAN");
+
+                //choices loop
+                while(choices){
+                    System.out.println("What race are you, Hero?\n[L]Lie\n[T]Tell the Truth\nYour choice: \n");
+
+                    switch (input.nextLine()) {
+                        case "L":
+                            System.out.printf("%s: I am a monster too.\n", newPlayer.namePlayer);
+
+                            //makes a test to check if the lie will work
+                            if(newPlayer.diceD20() >= newEnemy[1].armorClass){
+                                System.out.println("DOORMAN STEVE: Oh, ok...\nI must have confused.");
+
+                            }else{ //starts a fight if the test not work
+
+                                System.out.println("DOORMAN STEVE: NO, YOU AREN'T A MONSTER!");
+
+                                //combat loop
+                                do{
+
+                                    //player choices
+                                    System.out.println("\n------------------------------------------------\n");
+                                    System.out.println("Hero, what do you want to do?\n[1]Attack\n[2]Run\nYour choice: ");
+                                    String playerTurn = input.nextLine();
+
+                                    if(playerTurn.equals("1")){
+                                        newPlayer.attack(newEnemy[1].armorClass, newEnemy[1], newPlayer.diceD20());
+                                    }else if(playerTurn.equals("2")){
+                                        
+                                        //the player can run from the combat
+                                        if(newPlayer.diceD20() > newEnemy[1].armorClass){
+                                            System.out.println("You got away safely!");
+                                            break;
+                                        }else{
+
+                                            //if he cant't run, the enemy still will attack he
+                                            System.out.println("You can't run!");
+                                        }
+
+                                    }else{
+
+                                        //if the player don't choose a valid option
+                                        System.out.println("Choose a valid option!");
+                                    }
+
+                                    System.out.println("\n------------------------------------------------\n");
+
+                                    if(newPlayer.life > 0 && newEnemy[1].life <= 0){
+                                        System.out.println("The Hero wins!");
+
+                                        break;
+                                    }
+
+                                    //enemy's time!
+                                    System.out.println("Now, it is the Enemy time!");
+
+                                    Thread.sleep(5000);
+                                    //shows the enemy's attributes and then he attacks
+                                    newEnemy[1].exibirAtributos();
+                                    newEnemy[1].attack(newPlayer.armorClass, newPlayer,newEnemy[1].diceD20());
+
+                                    //shows the player's life
+                                    System.out.printf("\nHero, your life is: %d\n", newPlayer.life);
+
+                                    //checks if someone wins and stops the combat loop
+                                    if(newPlayer.life <= 0 && newEnemy[1].life > 0){
+
+                                        System.out.println("\n------------------------------------------------\n");
+                                        System.out.println("The Enemy wins!");
+                                        System.out.println("Unfortunately, everyone waited for a Hero who never came.\nThe Kingdom was dominated and destroyed.");
+                                        System.out.println("\n------------------------------------------------\n");
+
+                                        isGameRunning = false; //stops the game
+                                        break; //stops the combat loop
+                                    }
+                                }while(newPlayer.level >= 0 && newEnemy[1].life >= 0); //end of combat loop
+
+                            } //end of else
+                            
+                            break; //ENDS CASE "L"
+                            
+                        case "T":
+                            System.out.printf("%s: I am a Human...\n", newPlayer.namePlayer);
+                        default:
+                            System.out.println("Choose a valid option!");
+                    }
+                }//end choices loop
+
+                
+
+
+
+
             
                 
 
@@ -504,6 +643,13 @@ class Enemy extends Player{
                 this.armorClass += 13;
                 this.attack += 15;
                 this.enemyType = "POOR-MAGE";
+                break;
+
+            case "DOORMAN":
+                this.life += 23;
+                this.armorClass += 13;
+                this.attack += 16;
+                this.enemyType = "DOORMAN";
                 break;
         }
     }

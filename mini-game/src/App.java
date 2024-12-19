@@ -313,15 +313,17 @@ public class App {
 
                 //choices loop
                 while(choices){
-                    System.out.println("What race are you, Hero?\n[L]Lie\n[T]Tell the Truth\nYour choice: \n");
+                    System.out.println("What race are you, Hero?\n[L]Lie\n[T]Tell the Truth\nYour choice: ");
 
-                    switch (input.nextLine()) {
+                    switch (input.nextLine().toUpperCase()) {
                         case "L":
                             System.out.printf("%s: I am a monster too.\n", newPlayer.namePlayer);
 
                             //makes a test to check if the lie will work
                             if(newPlayer.diceD20() >= newEnemy[1].armorClass){
                                 System.out.println("DOORMAN STEVE: Oh, ok...\nI must have confused.");
+
+                                choices = false; //stops the choices loop
 
                             }else{ //starts a fight if the test not work
 
@@ -342,7 +344,9 @@ public class App {
                                         //the player can run from the combat
                                         if(newPlayer.diceD20() > newEnemy[1].armorClass){
                                             System.out.println("You got away safely!");
-                                            break;
+
+                                            choices = false; //stops the choices loop
+                                            break;//stops the combat loop
                                         }else{
 
                                             //if he cant't run, the enemy still will attack he
@@ -360,7 +364,8 @@ public class App {
                                     if(newPlayer.life > 0 && newEnemy[1].life <= 0){
                                         System.out.println("The Hero wins!");
 
-                                        break;
+                                        choices = false; //stops the combat loop
+                                        break; //stops the combat loop
                                     }
 
                                     //enemy's time!
@@ -383,6 +388,7 @@ public class App {
                                         System.out.println("\n------------------------------------------------\n");
 
                                         isGameRunning = false; //stops the game
+                                        choices = false; //stops the choices loop
                                         break; //stops the combat loop
                                     }
                                 }while(newPlayer.level >= 0 && newEnemy[1].life >= 0); //end of combat loop
@@ -393,12 +399,16 @@ public class App {
                             
                         case "T":
                             System.out.printf("%s: I am a Human...\n", newPlayer.namePlayer);
+
+                            choices = false; //stops the choices loop
+                            break; //ends case "T"
                         default:
                             System.out.println("Choose a valid option!");
                     }
                 }//end choices loop
 
-                
+                System.out.println("\n----------------***---------------\n");
+                System.out.println("\nAcabou o loop de escolhas!");
 
 
 

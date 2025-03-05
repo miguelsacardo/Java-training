@@ -30,19 +30,29 @@ public class App {
 
         // check if a number is prime
         int divisors = 0;
-        int numbers = 20;
+        int numbers_count = 1;
 
         System.out.println("Write a number to check if is prime: ");
         int number_to_check = Integer.parseInt(input.nextLine());
-        while(numbers > 0)
+        while(numbers_count <= number_to_check)
         {
-            if(number_to_check % numbers == 0)
+            if(number_to_check % numbers_count == 0)
             {
+                System.out.println(numbers_count);
                 divisors += 1;
             }
+
+            numbers_count += 1;
         }
 
-        
-
+        if(divisors == 2)
+        {
+            System.out.println("The number " + number_to_check + " is prime!");
+        }
+        else
+        {
+            System.out.println("The number " + number_to_check + " is not prime!");
+        }
+        System.out.printf("divisors: %d", divisors);
     }
 }
